@@ -1,0 +1,231 @@
+/* ——— Premium Footer ——— */
+.footer {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(8, 8, 8, 0.6) 30%,
+    rgba(6, 6, 6, 0.95) 100%
+  );
+  border-top: 1px solid var(--glass-border);
+  padding: clamp(4rem, 10vw, 6rem) 0 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 600px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-red-faded) 20%,
+    var(--accent-red-faded) 80%,
+    transparent
+  );
+  opacity: 0.6;
+}
+
+.footer-inner {
+  padding-bottom: 2.5rem;
+}
+
+/* ——— Hero logo block ——— */
+.footer-hero {
+  margin-bottom: clamp(3rem, 6vw, 4.5rem);
+  padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.footer-logo {
+  display: inline-block;
+  margin-bottom: 1rem;
+  transition: opacity var(--transition-fast);
+}
+
+.footer-logo:hover {
+  opacity: 0.9;
+}
+
+.footer-logo-main,
+.footer-logo-accent {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  display: inline;
+}
+
+.footer-logo-main {
+  font-size: clamp(3.5rem, 12vw, 7rem);
+  color: var(--text-primary);
+  letter-spacing: 0.06em;
+  margin-right: 0.2em;
+}
+
+.footer-logo-accent {
+  font-size: clamp(3.5rem, 12vw, 7rem);
+  color: var(--accent-red);
+  letter-spacing: 0.2em;
+}
+
+.footer-tagline {
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  color: var(--text-muted);
+  max-width: 42ch;
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+/* ——— Content grid ——— */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: clamp(2rem, 4vw, 3rem);
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.footer-col-nav {
+  min-width: 140px;
+}
+
+.footer-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  font-weight: 400;
+}
+
+.footer-links,
+.footer-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-links a,
+.footer-list a {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  transition: color 0.25s ease, transform 0.2s ease;
+}
+
+.footer-links a:hover,
+.footer-list a:hover {
+  color: var(--accent-red);
+}
+
+.footer-col-connect .footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.footer-col-connect .footer-social a {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  transition: color 0.25s ease;
+}
+
+.footer-col-connect .footer-social a:hover {
+  color: var(--accent-red);
+}
+
+.footer-email {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  transition: color 0.25s ease;
+}
+
+.footer-email:hover {
+  color: var(--accent-red);
+}
+
+/* ——— Bottom bar: premium & professional "edited by" style ——— */
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.footer-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-legal-links a {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  transition: color 0.25s ease;
+}
+
+.footer-legal-links a:hover {
+  color: var(--accent-red);
+}
+
+.footer-dot {
+  color: var(--text-muted);
+  opacity: 0.5;
+  font-size: 0.7rem;
+  user-select: none;
+}
+
+/* Professional "edited by" / credit line */
+.footer-credit {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+  letter-spacing: 0.02em;
+  max-width: 32ch;
+  text-align: right;
+}
+
+.footer-credit::before {
+  content: '— ';
+  opacity: 0.6;
+}
+
+/* ——— Responsive ——— */
+@media (max-width: 640px) {
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .footer-credit {
+    text-align: left;
+  }
+
+  .footer-credit::before {
+    content: '';
+  }
+}

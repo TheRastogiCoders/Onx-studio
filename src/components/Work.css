@@ -1,0 +1,256 @@
+/* ——— Selected Work: big cards, video preview, autoplay, transparent premium ——— */
+
+.work {
+  background: transparent;
+  position: relative;
+  padding-bottom: clamp(3rem, 8vw, 5rem);
+}
+
+.work-inner {
+  padding-bottom: 1.5rem;
+}
+
+.work-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.work-track-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.work-track-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(80px, 12vw, 180px);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.work-track-fade-left {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-dark) 0%, transparent 100%);
+}
+
+.work-track-fade-right {
+  right: 0;
+  left: auto;
+  background: linear-gradient(to left, var(--bg-dark) 0%, transparent 100%);
+}
+
+.work-track {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.5rem clamp(1.5rem, 5vw, 4rem) 2.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.work-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ——— Auto-scroll: seamless loop (duplicated cards, translate -50%) ——— */
+.work-track--auto {
+  width: max-content;
+  overflow: visible;
+  scroll-snap-type: none;
+  animation: workAutoScroll 85s linear infinite;
+}
+
+@keyframes workAutoScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-track--auto {
+    animation: none;
+  }
+}
+
+/* ——— Big, transparent premium card ——— */
+.work-card {
+  flex: 0 0 auto;
+  width: min(340px, 70vw);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.work-card:hover {
+  transform: scale(1.02);
+}
+
+.work-card-glass {
+  height: 100%;
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+}
+
+.work-card:hover .work-card-glass {
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 32px 64px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+  background: rgba(14, 14, 14, 0.98);
+}
+
+/* ——— Video / media area: monitor-style frame ——— */
+.work-card-media {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  background: #0a0a0a;
+  padding: 12px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.work-card-video {
+  position: absolute;
+  inset: 12px;
+  width: calc(100% - 24px);
+  height: calc(100% - 24px);
+  object-fit: cover;
+  border-radius: 2px;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.work-card:hover .work-card-video {
+  transform: scale(1.04);
+}
+
+.work-card-placeholder {
+  position: absolute;
+  inset: 12px;
+  border-radius: 2px;
+  background: linear-gradient(145deg, rgba(20, 20, 20, 0.95) 0%, var(--accent-red-subtle) 100%);
+}
+
+.work-card-media-overlay {
+  position: absolute;
+  inset: 12px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, transparent 0%, transparent 45%, rgba(0, 0, 0, 0.5) 100%);
+  pointer-events: none;
+}
+
+/* Info — over the video, bottom; hidden by default, show on card hover */
+.work-card-info {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.75) 35%, rgba(0, 0, 0, 0.9) 100%);
+  border-radius: 0 0 2px 2px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.work-card:hover .work-card-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.work-card-category {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-red);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.work-card-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+}
+
+.work-card-tag {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.work-cta-wrap {
+  padding-top: 2rem;
+}
+
+.work-cta {
+  text-align: center;
+}
+
+/* ——— Premium "See Full Reel" button ——— */
+.btn-reel {
+  position: relative;
+  padding: 1rem 2.25rem;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  background: rgba(18, 18, 18, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: color 0.35s ease, border-color 0.35s ease, background 0.35s ease,
+    box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset,
+    0 4px 20px -4px rgba(0, 0, 0, 0.4);
+}
+
+.btn-reel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  border-radius: 12px 12px 0 0;
+  opacity: 0.8;
+}
+
+.btn-reel:hover {
+  color: #fff;
+  background: rgba(201, 74, 74, 0.15);
+  border-color: rgba(201, 74, 74, 0.4);
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 12px 32px -8px rgba(0, 0, 0, 0.5),
+    0 0 40px -12px rgba(201, 74, 74, 0.25);
+}
+
+.btn-reel:active {
+  transform: translateY(0);
+}
