@@ -1,15 +1,7 @@
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { Link } from 'react-router-dom';
+import { projects } from '../data/projects';
 import './PageShared.css';
-
-const projects = [
-  { id: 1, title: 'Brand Campaign — Automotive', category: 'Commercial', tag: 'Color • Edit', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
-  { id: 2, title: 'Music Video — Indie Artist', category: 'Music', tag: 'Full Pipeline', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
-  { id: 3, title: 'Product Launch — Tech', category: 'Ads', tag: 'Motion • Edit', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' },
-  { id: 4, title: 'Doc Series — Ep. 1', category: 'Documentary', tag: 'Edit • Grade', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4' },
-  { id: 5, title: 'Social Series — 12 Episodes', category: 'Social', tag: 'Edit', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4' },
-  { id: 6, title: 'Fashion Film', category: 'Fashion', tag: 'Color • Motion', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
-];
 
 export default function WorkPage() {
   const [ref, isVisible] = useScrollReveal({ threshold: 0.06 });
@@ -32,8 +24,9 @@ export default function WorkPage() {
       <section className="page-content section work-page-grid-wrap" ref={ref}>
         <div className="work-page-grid">
           {projects.map((project, i) => (
-            <article
+            <Link
               key={project.id}
+              to={`/work/${project.slug}`}
               className={`work-page-card reveal reveal-scale reveal-delay-${Math.min((i % 3) + 1, 3)} ${isVisible ? 'reveal-visible' : ''}`}
             >
               <div className="work-page-card-glass">
@@ -57,7 +50,7 @@ export default function WorkPage() {
                   <span className="work-page-tag">{project.tag}</span>
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
         <div className={`page-cta reveal reveal-delay-3 ${isVisible ? 'reveal-visible' : ''}`}>

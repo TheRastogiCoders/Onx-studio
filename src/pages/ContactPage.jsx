@@ -32,7 +32,7 @@ export default function ContactPage() {
           <div className="contact-page-left">
             <div className={`contact-page-info reveal reveal-delay-1 ${isVisible ? 'reveal-visible' : ''}`}>
               <p className="contact-page-label">Contact</p>
-              <a href="mailto:hello@onxstudio.com" className="contact-page-link">hello@onxstudio.com</a>
+              <a href="mailto:onxstudio@gmail.com" className="contact-page-link">onxstudio@gmail.com</a>
               <a href="tel:+918426980385" className="contact-page-link">+91 84269 80385</a>
               <div className="contact-page-address">
                 <span className="contact-page-address-label">Studio</span>
@@ -42,13 +42,6 @@ export default function ContactPage() {
                 </p>
               </div>
               <p className="contact-page-note">Available Mon–Fri, 9am–6pm EST</p>
-              <div className="contact-page-social">
-                <span className="contact-page-social-label">Follow us</span>
-                <div className="contact-page-social-links">
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="contact-page-social-link" aria-label="Instagram">Instagram</a>
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="contact-page-social-link" aria-label="LinkedIn">LinkedIn</a>
-                </div>
-              </div>
             </div>
             <div className={`contact-page-tips reveal reveal-delay-2 ${isVisible ? 'reveal-visible' : ''}`}>
               <p className="contact-page-tips-title">Include in your message</p>

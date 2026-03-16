@@ -33,6 +33,7 @@ export default function About() {
             </div>
           </div>
         </div>
+
         <div className={`about-visual-wrap reveal reveal-from-right reveal-delay-2 ${isVisible ? 'reveal-visible' : ''}`}>
           <div className="about-visual">
             <div className="about-visual-bg" aria-hidden="true" />

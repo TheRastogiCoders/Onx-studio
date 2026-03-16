@@ -107,7 +107,6 @@
 
 .hero-title-line {
   display: inline-block;
-  white-space: nowrap;
 }
 
 .hero-title-highlight {
@@ -221,9 +220,59 @@
 }
 
 @media (max-width: 768px) {
-  .hero { padding-top: 5.5rem; padding-bottom: 4rem; }
+  .hero {
+    padding-top: 4.5rem;
+    padding-bottom: 3.5rem;
+  }
   .hero-label-line { width: 28px; }
   .hero-label { letter-spacing: 0.2em; }
   .hero-btn { min-width: 160px; padding: 0.9rem 1.5rem; }
   .hero-scroll { bottom: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 5rem 1.25rem 3.5rem;
+  }
+
+  .hero-content {
+    align-items: center;
+    max-width: 100%;
+  }
+
+  .hero-title {
+    font-size: clamp(2.25rem, 9vw, 3rem);
+    line-height: 1.05;
+  }
+
+  .hero-title-line {
+    display: block;
+    white-space: normal;
+  }
+
+  .hero-title-line-secondary {
+    white-space: nowrap;
+  }
+
+  .hero-sub {
+    max-width: 28ch;
+    font-size: 0.95rem;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-btn {
+    width: 90%;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: clamp(2.05rem, 8.4vw, 2.7rem);
+  }
 }

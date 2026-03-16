@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import './Footer.css';
 
 export default function Footer() {
@@ -9,10 +8,10 @@ export default function Footer() {
       <div className="footer-inner section">
         {/* Hero logo block — big, premium */}
         <div className="footer-hero">
-          <Link to="/" className="footer-logo">
+          <a href="#top" className="footer-logo">
             <span className="footer-logo-main">ONX</span>
             <span className="footer-logo-accent">STUDIO</span>
-          </Link>
+          </a>
           <p className="footer-tagline">
             Crafting premium digital experiences. Strategy, design, and development for brands that lead.
           </p>
@@ -23,40 +22,34 @@ export default function Footer() {
           <div className="footer-col footer-col-nav">
             <h4 className="footer-heading">Navigate</h4>
             <nav className="footer-links">
-              <Link to="/services">Services</Link>
-              <Link to="/work">Work</Link>
-              <Link to="/process">Process</Link>
-              <Link to="/about">About</Link>
-              <Link to="/contact">Contact</Link>
+              <a href="#services">Services</a>
+              <a href="#work">Work</a>
+              <a href="#process">Process</a>
+              <a href="#about">About</a>
+              <a href="#contact">Contact</a>
             </nav>
           </div>
           <div className="footer-col">
             <h4 className="footer-heading">Services</h4>
             <ul className="footer-list">
-              <li><Link to="/services">Video Editing</Link></li>
-              <li><Link to="/services">Color Grading</Link></li>
-              <li><Link to="/services">Motion & Film</Link></li>
-              <li><Link to="/process">Process</Link></li>
+              <li><a href="#services">Video Editing</a></li>
+              <li><a href="#services">Color Grading</a></li>
+              <li><a href="#services">Motion & Film</a></li>
+              <li><a href="#process">Process</a></li>
             </ul>
           </div>
           <div className="footer-col">
             <h4 className="footer-heading">Company</h4>
             <ul className="footer-list">
-              <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/work">Case Studies</Link></li>
-              <li><Link to="/contact">Careers</Link></li>
-              <li><Link to="/contact">Press</Link></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#work">Case Studies</a></li>
+              <li><a href="#contact">Careers</a></li>
+              <li><a href="#contact">Press</a></li>
             </ul>
           </div>
           <div className="footer-col footer-col-connect">
-            <h4 className="footer-heading">Connect</h4>
-            <div className="footer-social">
-              <a href="#" aria-label="Instagram">Instagram</a>
-              <a href="#" aria-label="Vimeo">Vimeo</a>
-              <a href="#" aria-label="LinkedIn">LinkedIn</a>
-              <a href="#" aria-label="Twitter">Twitter</a>
-            </div>
-            <a href="mailto:hello@onxstudio.com" className="footer-email">hello@onxstudio.com</a>
+            <h4 className="footer-heading">Contact</h4>
+            <a href="mailto:onxstudio@gmail.com" className="footer-email">onxstudio@gmail.com</a>
           </div>
         </div>
 

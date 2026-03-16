@@ -9,7 +9,7 @@ import Contact from '../components/Contact';
 
 export default function HomePage() {
   return (
-    <div className="page page-home">
+    <div className="page page-home" id="top">
       <Hero />
       <HeroMarquee />
       <Services />

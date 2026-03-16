@@ -1,21 +1,23 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { projects } from '../data/projects';
 import './Work.css';
-
-// Add your own video URLs here — use .mp4 placed in /public for best autoplay support (muted required for autoplay)
-const projects = [
-  { id: 1, title: 'Brand Campaign — Automotive', category: 'Commercial', tag: 'Color • Edit', videoUrl: '/IMG_9795.MP4' },
-  { id: 2, title: 'Music Video — Indie Artist', category: 'Music', tag: 'Full Pipeline', videoUrl: '/IMG_9793.MP4' },
-  { id: 3, title: 'Product Launch — Tech', category: 'Ads', tag: 'Motion • Edit', videoUrl: '/IMG_9794.MP4' },
-  { id: 4, title: 'Doc Series — Ep. 1', category: 'Documentary', tag: 'Edit • Grade', videoUrl: '/IMG_9796.MP4' },
-  { id: 5, title: 'Social Series — 12 Episodes', category: 'Social', tag: 'Edit', videoUrl: '/IMG_9797.MP4' },
-  { id: 6, title: 'Fashion Film', category: 'Fashion', tag: 'Color • Motion', videoUrl: '/V.1.mov' },
-  { id: 7, title: 'Brand Campaign — Automotive', category: 'Commercial', tag: 'Color • Edit', videoUrl: '/V.2.mp4' },
-];
 
 export default function Work() {
   const scrollRef = useRef(null);
   const [ref, isVisible] = useScrollReveal({ threshold: 0.08 });
+  const [activeProject, setActiveProject] = useState(null);
+
+  useEffect(() => {
+    if (!activeProject) return undefined;
+
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setActiveProject(null);
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [activeProject]);
 
   return (
     <section id="work" className="work" ref={ref}>
@@ -40,10 +42,12 @@ export default function Work() {
           aria-label="Selected work carousel"
         >
           {projects.map((project, i) => (
-            <a
+            <button
               key={`${project.id}-${i}`}
-              href="#contact"
-              className="work-card"
+              type="button"
+              className="work-card work-card-button"
+              onClick={() => setActiveProject(project)}
+              aria-label={`Open project: ${project.title}`}
             >
               <div className="work-card-glass">
                 <div className="work-card-media">
@@ -63,7 +67,7 @@ export default function Work() {
                   <div className="work-card-media-overlay" />
                 </div>
               </div>
-            </a>
+            </button>
           ))}
         </div>
       </div>
@@ -73,6 +77,45 @@ export default function Work() {
           <a href="#contact" className="btn btn-reel">See Full Reel</a>
         </div>
       </div>
+
+      {activeProject && (
+        <div
+          className="work-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Project video: ${activeProject.title}`}
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget) setActiveProject(null);
+          }}
+        >
+          <div className="work-modal-card" role="document">
+            <div className="work-modal-head">
+              <div className="work-modal-meta">
+                <span className="work-modal-category">{activeProject.category}</span>
+                <h3 className="work-modal-title">{activeProject.title}</h3>
+                <span className="work-modal-tag">{activeProject.tag}</span>
+              </div>
+              <button
+                type="button"
+                className="work-modal-close"
+                onClick={() => setActiveProject(null)}
+                aria-label="Close"
+              >
+                ×
+              </button>
+            </div>
+            <div className="work-modal-player">
+              <video
+                className="work-modal-video"
+                src={activeProject.videoUrl}
+                controls
+                playsInline
+                preload="metadata"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

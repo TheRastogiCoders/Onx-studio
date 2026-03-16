@@ -23,8 +23,8 @@ export default function Contact() {
             Tell us about your project. We'll get back within 24 hours.
           </p>
           <div className={`contact-details reveal reveal-delay-3 ${isVisible ? 'reveal-visible' : ''}`}>
-            <a href="mailto:hello@onxstudio.com">hello@onxstudio.com</a>
-            <a href="tel:+1234567890">+1 (234) 567-890</a>
+            <a href="mailto:onxstudio@gmail.com">onxstudio@gmail.com</a>
+            <a href="tel:+918426980385">+91 84269 80385</a>
           </div>
         </div>
         <form

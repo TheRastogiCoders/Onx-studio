@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import './Hero.css';
 
@@ -41,8 +40,8 @@ export default function Hero() {
             Premium editing, color grading, and motion design for brands and creators.
           </p>
           <div className={`hero-cta reveal reveal-delay-3 ${isVisible ? 'reveal-visible' : ''}`}>
-            <Link to="/work" className="hero-btn hero-btn-primary">View Our Work</Link>
-            <Link to="/contact" className="hero-btn hero-btn-outline">Get in Touch</Link>
+            <a href="#work" className="hero-btn hero-btn-primary">View Our Work</a>
+            <a href="#contact" className="hero-btn hero-btn-outline">Get in Touch</a>
           </div>
         </div>
       </div>

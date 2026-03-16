@@ -65,7 +65,7 @@
   width: max-content;
   overflow: visible;
   scroll-snap-type: none;
-  animation: workAutoScroll 85s linear infinite;
+  animation: workAutoScroll 45s linear infinite;
 }
 
 @keyframes workAutoScroll {
@@ -89,10 +89,116 @@
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.work-card-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+}
+
+.work-card-button:focus-visible {
+  outline: 2px solid rgba(201, 74, 74, 0.65);
+  outline-offset: 6px;
+  border-radius: 18px;
+}
+
 .work-card:hover {
   transform: scale(1.02);
 }
 
+.work-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  padding: clamp(1rem, 4vw, 2rem);
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: grid;
+  place-items: center;
+}
+
+.work-modal-card {
+  width: min(1000px, 100%);
+  max-height: min(90vh, 900px);
+  background: rgba(12, 12, 12, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.65);
+}
+
+.work-modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.work-modal-meta {
+  min-width: 0;
+}
+
+.work-modal-category {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-red);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.work-modal-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 650;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem;
+  line-height: 1.35;
+}
+
+.work-modal-tag {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.work-modal-close {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+  line-height: 1;
+  transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.work-modal-close:hover {
+  transform: translateY(-1px);
+  background: rgba(201, 74, 74, 0.12);
+  border-color: rgba(201, 74, 74, 0.28);
+}
+
+.work-modal-player {
+  background: #000;
+}
+
+.work-modal-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 78vh;
+  background: #000;
+}
 .work-card-glass {
   height: 100%;
   background: rgba(10, 10, 10, 0.95);
