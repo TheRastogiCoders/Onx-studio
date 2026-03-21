@@ -1,52 +1,75 @@
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import { Clapperboard, Palette, Sparkles } from 'lucide-react';
 import './About.css';
 
+const PRINCIPLES = [
+  {
+    title: 'Edit with intent',
+    desc: 'Every cut earns its place—pacing that holds attention without noise.',
+    Icon: Clapperboard,
+  },
+  {
+    title: 'Color as story',
+    desc: 'Grades that support mood and brand, from social to broadcast.',
+    Icon: Palette,
+  },
+  {
+    title: 'Motion that serves',
+    desc: 'Graphics and titles that clarify, not distract.',
+    Icon: Sparkles,
+  },
+];
+
+const STATS = [
+  { value: '200+', label: 'Projects delivered' },
+  { value: '3+', label: 'Years in post' },
+  { value: '24h', label: 'Typical reply' },
+];
+
 export default function About() {
-  const [ref, isVisible] = useScrollReveal({ threshold: 0.12 });
-
   return (
-    <section id="about" className="about section" ref={ref}>
-      <div className="about-wrap">
-        <div className="about-content">
-          <div className={`about-label-wrap reveal ${isVisible ? 'reveal-visible' : ''}`}>
-            <span className="about-label-line" aria-hidden="true" />
-            <p className="section-label about-label">About Us</p>
-          </div>
-          <h2 className={`section-title about-title reveal reveal-delay-1 ${isVisible ? 'reveal-visible' : ''}`}>
-            Edit with <span>Intent</span>
-          </h2>
-          <p className={`about-lead reveal reveal-delay-2 ${isVisible ? 'reveal-visible' : ''}`}>
-            We're a video editing agency built for brands and creators who care about craft. Every cut, grade, and motion choice serves the story—so your content stands out without shouting.
-          </p>
-          <p className={`about-text reveal reveal-delay-3 ${isVisible ? 'reveal-visible' : ''}`}>
-            From broadcast spots to social series, we handle the full post pipeline: offline edit, color grading, and motion design. No endless revisions—we get to the right version fast.
-          </p>
-          <div className={`about-stats reveal reveal-delay-4 ${isVisible ? 'reveal-visible' : ''}`}>
-            <div className="about-stat">
-              <span className="about-stat-num">120+</span>
-              <span className="about-stat-label">Projects Delivered</span>
+    <section id="about" className="about" aria-labelledby="about-heading">
+      <div className="about-bg" aria-hidden="true" />
+      <div className="about-inner section">
+        <div className="about-shell">
+          <div className="about-panel">
+            <div className="about-label-row">
+              <span className="about-label-line about-label-line--left" aria-hidden="true" />
+              <p className="about-eyebrow">About us</p>
+              <span className="about-label-line about-label-line--right" aria-hidden="true" />
             </div>
-            <div className="about-stat-divider" aria-hidden="true" />
-            <div className="about-stat">
-              <span className="about-stat-num">8+</span>
-              <span className="about-stat-label">Years in Post</span>
-            </div>
+            <h2 id="about-heading" className="about-title">
+              <span className="about-title-line">Craft-led</span>{' '}
+              <span className="about-title-accent">post production</span>
+            </h2>
+            <p className="about-lede">
+              We partner with brands and creators who care how their work feels—not just how fast it ships.
+              Offline edit, grade, and motion under one roof, with a pipeline built for clarity and speed.
+            </p>
+            <p className="about-body">
+              From campaign spots to long-form series, we treat each project as a narrative problem: rhythm,
+              contrast, and sound design working together. Fewer endless loops—more decisive passes until the
+              cut feels inevitable.
+            </p>
+            <ul className="about-principles" role="list">
+              {PRINCIPLES.map(({ title, desc, Icon }) => (
+                <li key={title} className="about-principle">
+                  <span className="about-principle-icon" aria-hidden="true">
+                    <Icon size={22} strokeWidth={1.35} />
+                  </span>
+                  <span className="about-principle-title">{title}</span>
+                  <span className="about-principle-desc">{desc}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
 
-        <div className={`about-visual-wrap reveal reveal-from-right reveal-delay-2 ${isVisible ? 'reveal-visible' : ''}`}>
-          <div className="about-visual">
-            <div className="about-visual-bg" aria-hidden="true" />
-            <div className="about-visual-frame" aria-hidden="true" />
-            <div className="about-visual-glow" aria-hidden="true" />
-            <div className="about-visual-content">
-              <span className="about-visual-icon" aria-hidden="true">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M8 5v14l11-7L8 5z" />
-                </svg>
-              </span>
-              <span className="about-visual-caption">Our craft in motion</span>
-            </div>
+          <div className="about-stats" role="list" aria-label="Studio highlights">
+            {STATS.map((s) => (
+              <div key={s.label} className="about-stat" role="listitem">
+                <span className="about-stat-value">{s.value}</span>
+                <span className="about-stat-label">{s.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

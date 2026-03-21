@@ -11,7 +11,7 @@
   inset: 0;
   background: radial-gradient(
     ellipse 80% 50% at 50% 80%,
-    rgba(201, 74, 74, 0.03) 0%,
+    rgba(139, 0, 0, 0.03) 0%,
     transparent 55%
   );
   pointer-events: none;
@@ -26,7 +26,7 @@
 
 .process-label {
   display: inline-block;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Oswald', system-ui, sans-serif;
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.28em;
@@ -36,7 +36,7 @@
 }
 
 .process-title {
-  font-family: 'Syne', 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(2.5rem, 5.5vw, 4rem);
   font-weight: 700;
   line-height: 1.08;
@@ -49,12 +49,19 @@
   color: var(--accent-red);
 }
 
-.process-sub {
-  font-family: 'DM Sans', system-ui, sans-serif;
-  font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+.process-sub-text {
+  margin: 0;
+  width: 100%;
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.625;
+  color: var(--text-muted);
+}
+
+@media (min-width: 768px) {
+  .process-sub-text {
+    font-size: 1.05rem;
+  }
 }
 
 /* ——— Grid: 3 equal cards, responsive ——— */
@@ -108,11 +115,11 @@
 
 .process-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(201, 74, 74, 0.22);
+  border-color: rgba(139, 0, 0, 0.22);
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.03) inset,
     0 20px 40px -12px rgba(0, 0, 0, 0.45),
-    0 0 50px -16px rgba(201, 74, 74, 0.08);
+    0 0 50px -16px rgba(139, 0, 0, 0.08);
 }
 
 .process-card-inner {
@@ -133,25 +140,25 @@
   width: 48px;
   height: 48px;
   margin-bottom: 1.35rem;
-  font-family: 'Syne', 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   color: var(--accent-red);
-  background: rgba(201, 74, 74, 0.1);
-  border: 1px solid rgba(201, 74, 74, 0.25);
+  background: rgba(139, 0, 0, 0.1);
+  border: 1px solid rgba(139, 0, 0, 0.25);
   border-radius: 12px;
   transition: background 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
 }
 
 .process-card:hover .process-num {
-  background: rgba(201, 74, 74, 0.16);
-  border-color: rgba(201, 74, 74, 0.4);
+  background: rgba(139, 0, 0, 0.16);
+  border-color: rgba(139, 0, 0, 0.4);
   transform: scale(1.05);
 }
 
 .process-card-title {
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Oswald', system-ui, sans-serif;
   font-size: 1.15rem;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -161,11 +168,11 @@
 }
 
 .process-card-text {
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Oswald', system-ui, sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.62);
+  color: #ffffff;
 }
 
 /* Arrow between cards (desktop only) */

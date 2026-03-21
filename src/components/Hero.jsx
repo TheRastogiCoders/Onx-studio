@@ -1,14 +1,17 @@
-import { useScrollReveal } from '../hooks/useScrollReveal';
 import './Hero.css';
 
-const HERO_VIDEO_SRC = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4';
+/** Hero background video (file in /public) */
+const HERO_VIDEO_SRC = '/IMG_2234%203.mov';
+
+const HERO_CONTENT = {
+  sub: 'Premium editing, color grading, and motion design for brands and creators.',
+};
 
 export default function Hero() {
-  const [ref, isVisible] = useScrollReveal({ threshold: 0.15 });
-
   return (
-    <section id="hero" className="hero" ref={ref}>
-      <div className="hero-video-wrap">
+    <section id="hero" className="hero" role="region" aria-label="Featured stories">
+      {/* Video fills the entire section — positioned relative to <section>, not any inner div */}
+      <div className="hero-video-wrap" aria-hidden="true">
         <video
           className="hero-video"
           src={HERO_VIDEO_SRC}
@@ -16,38 +19,23 @@ export default function Hero() {
           muted
           loop
           playsInline
-          aria-hidden="true"
         />
-        <div className="hero-video-overlay" aria-hidden="true" />
       </div>
+
+      {/* Content layer above the video */}
       <div className="hero-inner section">
         <div className="hero-content">
-          <div className={`hero-label-wrap reveal ${isVisible ? 'reveal-visible' : ''}`}>
-            <span className="hero-label-line" aria-hidden="true" />
-            <p className="hero-label">Video Editing Agency</p>
-            <span className="hero-label-line hero-label-line-right" aria-hidden="true" />
-          </div>
-          <h1 className={`hero-title reveal reveal-delay-1 ${isVisible ? 'reveal-visible' : ''}`}>
-            <span className="hero-title-line">
-              We Craft <span className="hero-title-highlight">Stories</span>
-            </span>
-            <br />
-            <span className="hero-title-line hero-title-line-secondary">
-              That Move.
-            </span>
+          <h1 className="hero-title hero-title-headline">
+            <span className="hero-title-white">Welcome to </span>
+            <span className="hero-title-red">ONX</span>
+            <span className="hero-title-white"> STUDIO</span>
           </h1>
-          <p className={`hero-sub reveal reveal-delay-2 ${isVisible ? 'reveal-visible' : ''}`}>
-            Premium editing, color grading, and motion design for brands and creators.
-          </p>
-          <div className={`hero-cta reveal reveal-delay-3 ${isVisible ? 'reveal-visible' : ''}`}>
+          <p className="hero-sub"><em>{HERO_CONTENT.sub}</em></p>
+          <div className="hero-cta">
             <a href="#work" className="hero-btn hero-btn-primary">View Our Work</a>
             <a href="#contact" className="hero-btn hero-btn-outline">Get in Touch</a>
           </div>
         </div>
-      </div>
-      <div className="hero-scroll" aria-hidden="true">
-        <span>Scroll</span>
-        <div className="hero-scroll-line" />
       </div>
     </section>
   );

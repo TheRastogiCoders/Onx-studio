@@ -99,7 +99,7 @@
 }
 
 .work-card-button:focus-visible {
-  outline: 2px solid rgba(201, 74, 74, 0.65);
+  outline: 2px solid rgba(139, 0, 0, 0.65);
   outline-offset: 6px;
   border-radius: 18px;
 }
@@ -121,6 +121,7 @@
 }
 
 .work-modal-card {
+  position: relative;
   width: min(1000px, 100%);
   max-height: min(90vh, 900px);
   background: rgba(12, 12, 12, 0.85);
@@ -130,49 +131,18 @@
   box-shadow: 0 32px 80px rgba(0, 0, 0, 0.65);
 }
 
-.work-modal-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1.1rem 1.25rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.work-modal-meta {
-  min-width: 0;
-}
-
-.work-modal-category {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent-red);
-  display: block;
-  margin-bottom: 0.35rem;
-}
-
-.work-modal-title {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 650;
-  color: var(--text-primary);
-  margin: 0 0 0.25rem;
-  line-height: 1.35;
-}
-
-.work-modal-tag {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.work-modal-close {
+.work-modal-close-absolute {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
   width: 38px;
   height: 38px;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(12, 12, 12, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: var(--text-primary);
   cursor: pointer;
   display: grid;
@@ -182,10 +152,10 @@
   transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
 }
 
-.work-modal-close:hover {
+.work-modal-close-absolute:hover {
   transform: translateY(-1px);
-  background: rgba(201, 74, 74, 0.12);
-  border-color: rgba(201, 74, 74, 0.28);
+  background: rgba(139, 0, 0, 0.4);
+  border-color: rgba(139, 0, 0, 0.6);
 }
 
 .work-modal-player {
@@ -289,7 +259,7 @@
 }
 
 .work-card-title {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 1.15rem;
   font-weight: 600;
   margin-bottom: 0.3rem;
@@ -316,7 +286,7 @@
 .btn-reel {
   position: relative;
   padding: 1rem 2.25rem;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Oswald', system-ui, sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.2em;
@@ -348,13 +318,13 @@
 
 .btn-reel:hover {
   color: #fff;
-  background: rgba(201, 74, 74, 0.15);
-  border-color: rgba(201, 74, 74, 0.4);
+  background: rgba(139, 0, 0, 0.15);
+  border-color: rgba(139, 0, 0, 0.4);
   transform: translateY(-2px);
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.05) inset,
     0 12px 32px -8px rgba(0, 0, 0, 0.5),
-    0 0 40px -12px rgba(201, 74, 74, 0.25);
+    0 0 40px -12px rgba(139, 0, 0, 0.25);
 }
 
 .btn-reel:active {

@@ -7,7 +7,7 @@
 .page-contact .page-hero-bg {
   background: radial-gradient(
     ellipse 90% 70% at 50% 0%,
-    rgba(201, 74, 74, 0.08) 0%,
+    rgba(139, 0, 0, 0.08) 0%,
     transparent 55%
   );
 }
@@ -34,7 +34,7 @@
   inset: -10%;
   background: radial-gradient(
     ellipse 60% 40% at 80% 60%,
-    rgba(201, 74, 74, 0.03) 0%,
+    rgba(139, 0, 0, 0.03) 0%,
     transparent 50%
   );
   pointer-events: none;
@@ -86,7 +86,7 @@
 }
 
 .contact-page-label {
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Oswald', system-ui, sans-serif;
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.26em;
@@ -97,7 +97,7 @@
 
 .contact-page-link {
   display: block;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Oswald', system-ui, sans-serif;
   font-size: 1.15rem;
   font-weight: 500;
   color: var(--text-primary);
@@ -120,20 +120,20 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
   margin-bottom: 0.35rem;
 }
 
 .contact-page-address-text {
   font-size: 0.95rem;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.75);
+  color: #ffffff;
   margin: 0;
 }
 
 .contact-page-note {
   font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
   margin-top: 1.25rem;
   padding-top: 1.25rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
@@ -151,7 +151,7 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
   margin-bottom: 0.6rem;
 }
 
@@ -196,7 +196,7 @@
   padding-left: 1.25rem;
   font-size: 0.9rem;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.65);
+  color: #ffffff;
 }
 
 .contact-page-tips-list li {
@@ -238,12 +238,12 @@
 
 .contact-page-form label {
   display: block;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Oswald', system-ui, sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
+  color: #ffffff;
   margin-bottom: 0.5rem;
 }
 
@@ -251,7 +251,7 @@
 .contact-page-form textarea {
   width: 100%;
   padding: 1rem 1.25rem;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Oswald', system-ui, sans-serif;
   font-size: 1rem;
   background: rgba(8, 8, 8, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -262,21 +262,21 @@
 
 .contact-page-form input::placeholder,
 .contact-page-form textarea::placeholder {
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .contact-page-form input:focus,
 .contact-page-form textarea:focus,
 .contact-page-form select:focus {
   outline: none;
-  border-color: rgba(201, 74, 74, 0.5);
-  box-shadow: 0 0 0 3px rgba(201, 74, 74, 0.1);
+  border-color: rgba(139, 0, 0, 0.5);
+  box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
 }
 
 .contact-page-select {
   width: 100%;
   padding: 1rem 1.25rem;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Oswald', system-ui, sans-serif;
   font-size: 1rem;
   background: rgba(8, 8, 8, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -310,18 +310,18 @@
 
 .contact-page-form .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px -8px rgba(201, 74, 74, 0.4);
+  box-shadow: 0 12px 32px -8px rgba(139, 0, 0, 0.4);
 }
 
 .contact-page-success {
   padding: 2rem;
   text-align: center;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Oswald', system-ui, sans-serif;
   font-size: 1.1rem;
   font-weight: 500;
-  color: var(--accent-red);
-  background: rgba(201, 74, 74, 0.08);
-  border: 1px solid rgba(201, 74, 74, 0.2);
+  color: #ffffff;
+  background: rgba(139, 0, 0, 0.08);
+  border: 1px solid rgba(139, 0, 0, 0.2);
   border-radius: 14px;
 }
 
@@ -339,7 +339,7 @@
 .contact-page-strip-text {
   margin: 0;
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.65);
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {

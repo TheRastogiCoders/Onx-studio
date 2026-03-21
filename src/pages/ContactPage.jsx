@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
 import './PageShared.css';
 import './ContactPage.css';
 
 export default function ContactPage() {
-  const [ref, isVisible] = useScrollReveal({ threshold: 0.1 });
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
@@ -17,22 +15,22 @@ export default function ContactPage() {
       <section className="page-hero">
         <div className="page-hero-bg" aria-hidden="true" />
         <div className="section page-hero-inner">
-          <p className={`page-hero-label reveal ${isVisible ? 'reveal-visible' : ''}`}>Get in Touch</p>
-          <h1 className={`page-hero-title reveal reveal-delay-1 ${isVisible ? 'reveal-visible' : ''}`}>
+          <p className="page-hero-label">Get in Touch</p>
+          <h1 className="page-hero-title">
             Let's <span>Create</span>
           </h1>
-          <p className={`page-hero-desc reveal reveal-delay-2 ${isVisible ? 'reveal-visible' : ''}`}>
+          <p className="page-hero-desc">
             Tell us about your project. We'll get back within 24 hours.
           </p>
         </div>
       </section>
 
-      <section className="page-content section contact-page-wrap" ref={ref}>
+      <section className="page-content section contact-page-wrap">
         <div className="contact-page-grid">
           <div className="contact-page-left">
-            <div className={`contact-page-info reveal reveal-delay-1 ${isVisible ? 'reveal-visible' : ''}`}>
+            <div className="contact-page-info">
               <p className="contact-page-label">Contact</p>
-              <a href="mailto:onxstudio@gmail.com" className="contact-page-link">onxstudio@gmail.com</a>
+              <a href="mailto:theonxstudio@gmail.com" className="contact-page-link">theonxstudio@gmail.com</a>
               <a href="tel:+918426980385" className="contact-page-link">+91 84269 80385</a>
               <div className="contact-page-address">
                 <span className="contact-page-address-label">Studio</span>
@@ -43,7 +41,7 @@ export default function ContactPage() {
               </div>
               <p className="contact-page-note">Available Mon–Fri, 9am–6pm EST</p>
             </div>
-            <div className={`contact-page-tips reveal reveal-delay-2 ${isVisible ? 'reveal-visible' : ''}`}>
+            <div className="contact-page-tips">
               <p className="contact-page-tips-title">Include in your message</p>
               <ul className="contact-page-tips-list">
                 <li>Project type (commercial, music video, etc.)</li>
@@ -52,10 +50,7 @@ export default function ContactPage() {
               </ul>
             </div>
           </div>
-          <form
-            className={`contact-page-form reveal reveal-from-right reveal-delay-2 ${isVisible ? 'reveal-visible' : ''}`}
-            onSubmit={handleSubmit}
-          >
+          <form className="contact-page-form" onSubmit={handleSubmit}>
             {submitted ? (
               <p className="contact-page-success">Thanks. We'll be in touch soon.</p>
             ) : (
@@ -88,7 +83,7 @@ export default function ContactPage() {
             )}
           </form>
         </div>
-        <div className={`contact-page-strip reveal reveal-delay-3 ${isVisible ? 'reveal-visible' : ''}`}>
+        <div className="contact-page-strip">
           <p className="contact-page-strip-text">We typically respond within 24 hours. Urgent requests? Call us directly.</p>
         </div>
       </section>

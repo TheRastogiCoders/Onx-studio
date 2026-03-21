@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
 import { projects } from '../data/projects';
 import './Work.css';
 
 export default function Work() {
   const scrollRef = useRef(null);
-  const [ref, isVisible] = useScrollReveal({ threshold: 0.08 });
   const [activeProject, setActiveProject] = useState(null);
 
   useEffect(() => {
@@ -20,12 +18,12 @@ export default function Work() {
   }, [activeProject]);
 
   return (
-    <section id="work" className="work" ref={ref}>
+    <section id="work" className="work">
       <div className="work-inner section">
         <div className="work-head">
           <div className="section-head">
-            <p className={`section-label reveal ${isVisible ? 'reveal-visible' : ''}`}>Portfolio</p>
-            <h2 className={`section-title reveal reveal-delay-1 ${isVisible ? 'reveal-visible' : ''}`}>
+            <p className="section-label">Portfolio</p>
+            <h2 className="section-title">
               Selected <span>Work</span>
             </h2>
           </div>
@@ -41,13 +39,16 @@ export default function Work() {
           role="region"
           aria-label="Selected work carousel"
         >
-          {projects.map((project, i) => (
+          {/* Render twice — animation scrolls -50% for a seamless infinite loop */}
+          {[...projects, ...projects].map((project, i) => (
             <button
               key={`${project.id}-${i}`}
               type="button"
               className="work-card work-card-button"
               onClick={() => setActiveProject(project)}
               aria-label={`Open project: ${project.title}`}
+              aria-hidden={i >= projects.length ? 'true' : undefined}
+              tabIndex={i >= projects.length ? -1 : 0}
             >
               <div className="work-card-glass">
                 <div className="work-card-media">
@@ -73,7 +74,7 @@ export default function Work() {
       </div>
 
       <div className="work-cta-wrap section">
-        <div className={`work-cta reveal reveal-delay-3 ${isVisible ? 'reveal-visible' : ''}`}>
+        <div className="work-cta">
           <a href="#contact" className="btn btn-reel">See Full Reel</a>
         </div>
       </div>
@@ -89,26 +90,21 @@ export default function Work() {
           }}
         >
           <div className="work-modal-card" role="document">
-            <div className="work-modal-head">
-              <div className="work-modal-meta">
-                <span className="work-modal-category">{activeProject.category}</span>
-                <h3 className="work-modal-title">{activeProject.title}</h3>
-                <span className="work-modal-tag">{activeProject.tag}</span>
-              </div>
-              <button
-                type="button"
-                className="work-modal-close"
-                onClick={() => setActiveProject(null)}
-                aria-label="Close"
-              >
-                ×
-              </button>
-            </div>
+            <button
+              type="button"
+              className="work-modal-close-absolute"
+              onClick={() => setActiveProject(null)}
+              aria-label="Close"
+            >
+              ×
+            </button>
             <div className="work-modal-player">
               <video
                 className="work-modal-video"
                 src={activeProject.videoUrl}
                 controls
+                autoPlay
+                loop
                 playsInline
                 preload="metadata"
               />

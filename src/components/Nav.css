@@ -1,549 +1,377 @@
-/* Premium navbar — not full cover; on scroll: one big long pill only */
+/* ─────────────────────────────────────────────
+   ONX Studio — Navbar
+   Split island: logo circle + links cylinder
+   ───────────────────────────────────────────── */
 
 :root {
   --nav-ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --nav-duration: 900ms;
+  --nav-red:  #8b0000;
 }
 
+html.nav-menu-open { overflow: hidden; }
+
+/* ─────────────────────────────────────────────
+   HEADER
+   ───────────────────────────────────────────── */
 .nav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 2000;
-  padding: 1.35rem clamp(1.5rem, 5vw, 3rem);
-  transition: padding var(--nav-duration) var(--nav-ease);
-  background: transparent;
-}
-
-/* Slightly tighter header spacing when scrolled */
-.nav-scrolled {
-  padding: 1rem clamp(1.25rem, 4vw, 2.5rem);
-}
-
-/* No full-width bar on scroll — backdrop stays invisible so pill is the only “complete” element */
-.nav-backdrop {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
+  z-index: 500;
+  padding: 0.85rem clamp(1rem, 4vw, 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
-  background: transparent;
-  border: none;
-  transition: opacity 0.4s ease;
+  animation: navFadeIn 0.5s ease both;
 }
 
-.nav-scrolled .nav-backdrop {
-  opacity: 0;
+@keyframes navFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
+/* ─────────────────────────────────────────────
+   SHARED WRAPPER — two islands that merge on scroll
+   ───────────────────────────────────────────── */
 .nav-inner {
-  position: relative;
-  z-index: 1;
-  max-width: 1400px;
-  margin: 0 auto;
+  pointer-events: all;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0;
+  border-radius: 9999px;
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
+  /* slow, cinematic merge */
+  transition:
+    gap        0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    padding    0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Merged state on scroll */
+.nav-scrolled .nav-inner {
+  gap: 0;
+  padding: 0.38rem 0.38rem 0.38rem 0.38rem;
+  background: #000;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 36px rgba(0, 0, 0, 0.65);
+}
+
+/* ─────────────────────────────────────────────
+   LOGO CIRCLE
+   ───────────────────────────────────────────── */
+.nav-logo-circle {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  transform: translateY(0);
-  transition: transform var(--nav-duration) var(--nav-ease);
-}
-
-/* Desktop/tablet: when scrolled, connect logo + links into one full pill */
-@media (min-width: 769px) {
-  .nav-scrolled .nav-inner {
-    padding: 0.7rem 0.75rem 0.7rem 1.15rem;
-    background: rgba(0, 0, 0, 0.28);
-    backdrop-filter: blur(28px) saturate(130%);
-    -webkit-backdrop-filter: blur(28px) saturate(130%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 9999px;
-    overflow: hidden;
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.04),
-      0 8px 32px -8px rgba(0, 0, 0, 0.35),
-      0 0 60px -16px rgba(201, 74, 74, 0.06);
-    transform: translateY(-1px);
-    transition:
-      padding var(--nav-duration) var(--nav-ease),
-      background var(--nav-duration) var(--nav-ease),
-      box-shadow var(--nav-duration) var(--nav-ease),
-      border-color var(--nav-duration) var(--nav-ease),
-      backdrop-filter var(--nav-duration) var(--nav-ease),
-      transform var(--nav-duration) var(--nav-ease);
-  }
-
-  /* Subtle sweep so it feels "animated" when it becomes one pill */
-  .nav-scrolled .nav-inner::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: inherit;
-    background: linear-gradient(
-      110deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.06) 42%,
-      rgba(201, 74, 74, 0.08) 52%,
-      rgba(255, 255, 255, 0.04) 60%,
-      transparent 100%
-    );
-    transform: translateX(-120%);
-    opacity: 0;
-    pointer-events: none;
-    animation: navSweep 1600ms var(--nav-ease) 1;
-  }
-
-  /* Remove the "second pill" look inside the connected pill */
-  .nav-scrolled .nav-pill {
-    padding: 0;
-    min-width: unset;
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border: none;
-    box-shadow: none;
-  }
-
-  .nav-scrolled .nav-pill:hover {
-    background: transparent;
-    border-color: transparent;
-  }
-}
-
-@keyframes navSweep {
-  0% { transform: translateX(-120%); opacity: 0; }
-  18% { opacity: 1; }
-  100% { transform: translateX(120%); opacity: 0; }
-}
-
-/* Logo — image on left, text on right; both big and short navbar */
-.nav-logo-wrap {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.85rem;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.55);
+  flex-shrink: 0;
   text-decoration: none;
-  color: inherit;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    background    0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color  0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow    0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    width         0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    height        0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity       0.2s;
 }
+.nav-logo-circle:hover { opacity: 0.82; }
 
-.nav-logo-wrap:hover {
-  opacity: 0.92;
+/* When merged: circle background dissolves into the shared wrapper */
+.nav-scrolled .nav-logo-circle {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  width: 58px;
+  height: 58px;
 }
 
 .nav-logo-img {
-  display: block;
-  height: 52px;
-  width: auto;
-  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 3px;
   object-fit: contain;
-  object-position: left center;
+  display: block;
+  flex-shrink: 0;
+  transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.nav-logo-text-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
+.nav-scrolled .nav-logo-img {
+  width: 44px;
+  height: 44px;
 }
 
-.nav-logo-tagline {
-  font-size: 0.625rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-}
-
-.nav-logo {
+/* ─────────────────────────────────────────────
+   CYLINDER PILL
+   ───────────────────────────────────────────── */
+.nav-pill-wrap {
   display: inline-flex;
-  align-items: baseline;
-  gap: 0.35rem;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.9rem;
-  letter-spacing: 0.16em;
-  line-height: 1;
-  letter-spacing: 0.14em;
+  align-items: center;
+  gap: 0;
+  padding: 0.35rem 0.35rem 0.35rem 0.5rem;
+  border-radius: 9999px;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.55);
+  transition:
+    background    0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color  0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow    0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    padding       0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.nav-logo-main {
-  color: var(--text-primary);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), 0 0 20px rgba(0, 0, 0, 0.2);
+/* When merged: pill background dissolves into the shared wrapper */
+.nav-scrolled .nav-pill-wrap {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  padding-left: 0.2rem;
 }
 
-.nav-logo-accent {
-  color: var(--accent-red);
-  letter-spacing: 0.2em;
-}
+/* ─────────────────────────────────────────────
+   DESKTOP LINKS  (hidden on mobile)
+   ───────────────────────────────────────────── */
+.nav-links { display: none; }
 
-/* Short navbar (scrolled): logo slightly smaller, still visible */
-@media (min-width: 769px) {
-  .nav-scrolled .nav-logo-img {
-    height: 40px;
+@media (min-width: 768px) {
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
   }
 }
 
-/* ——— Pill: fully transparent, frosted glass; “big long” when scrolled ——— */
-.nav-pill {
-  display: flex;
-  align-items: center;
-  padding: 0.6rem 0.6rem 0.6rem 1.5rem;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(20px) saturate(120%);
-  -webkit-backdrop-filter: blur(20px) saturate(120%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03);
-  transition:
-    padding var(--nav-duration) var(--nav-ease),
-    min-width var(--nav-duration) var(--nav-ease),
-    background var(--nav-duration) var(--nav-ease),
-    border-color var(--nav-duration) var(--nav-ease),
-    box-shadow var(--nav-duration) var(--nav-ease),
-    backdrop-filter var(--nav-duration) var(--nav-ease);
-}
-
-.nav-pill:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.12);
-}
-
-.nav-pill-inner {
-  display: flex;
-  align-items: center;
-  gap: 0.15rem;
-}
-
-.nav-scrolled .nav-pill-inner {
-  gap: 0.2rem;
-}
-
-/* Nav links — readable over transparent/video */
 .nav-link {
-  padding: 0.6rem 1.1rem;
-  font-size: 0.78rem;
+  font-family: 'Oswald', system-ui, sans-serif;
+  font-size: 0.70rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4), 0 0 1px rgba(0, 0, 0, 0.5);
-  transition: color 0.25s ease, opacity 0.25s ease;
+  color: rgba(255, 255, 255, 0.58);
+  text-decoration: none;
+  padding: 0.42rem 0.85rem;
+  border-radius: 9999px;
   white-space: nowrap;
+  transition: color 0.18s, background 0.18s;
 }
-
 .nav-link:hover {
   color: #fff;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.07);
 }
 
-/* Separators — thin vertical lines, subtle over transparent */
-.nav-pill-divider {
-  width: 1px;
-  height: 1.1rem;
-  margin: 0 0.35rem;
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2), transparent);
-  border-radius: 1px;
-  flex-shrink: 0;
+/* ─────────────────────────────────────────────
+   DESKTOP CTA  (hidden on mobile)
+   ───────────────────────────────────────────── */
+.nav-cta-desktop { display: none; }
+
+@media (min-width: 768px) {
+  .nav-cta-desktop {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.48rem 1.1rem;
+    font-family: 'Oswald', system-ui, sans-serif;
+    font-size: 0.70rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #0d0d0d;
+    text-decoration: none;
+    background: #fff;
+    border-radius: 9999px;
+    border: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: filter 0.2s, transform 0.2s;
+  }
+  .nav-cta-desktop:hover {
+    filter: brightness(0.90);
+    transform: translateY(-1px);
+  }
+  .nav-cta-desktop:active { transform: scale(0.97); }
 }
 
-/* CTA — muted red, rounded pill, stands out */
-.nav-cta {
-  padding: 0.55rem 1.25rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+/* ─────────────────────────────────────────────
+   HAMBURGER  (mobile only)
+   ───────────────────────────────────────────── */
+.nav-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: #fff;
-  background: linear-gradient(180deg, #c94a4a 0%, #b03d3d 100%);
-  border: none;
-  border-radius: 9999px;
-  box-shadow: 
-    0 1px 0 0 rgba(255, 255, 255, 0.1) inset,
-    0 2px 8px -2px rgba(201, 74, 74, 0.4);
-  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-  white-space: nowrap;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: background 0.18s;
+}
+.nav-toggle:hover { background: rgba(255, 255, 255, 0.14); }
+
+@media (min-width: 768px) { .nav-toggle { display: none; } }
+
+/* Mobile */
+@media (max-width: 767px) {
+  .nav {
+    padding: 0.65rem 0.75rem;
+  }
+
+  .nav-inner {
+    width: 100%;
+  }
+
+  .nav-logo-circle {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+
+  .nav-logo-img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .nav-pill-wrap {
+    flex: 1;
+    justify-content: flex-end;
+    padding: 0.32rem 0.32rem 0.32rem 0.5rem;
+  }
+
+  /* On mobile merge is instant — no animation needed */
+  .nav-scrolled .nav-inner {
+    gap: 0;
+    transition: none;
+  }
 }
 
-.nav-cta:hover {
-  background: linear-gradient(180deg, #d15555 0%, #c94a4a 100%);
-  transform: translateY(-1px);
-  box-shadow: 
-    0 1px 0 0 rgba(255, 255, 255, 0.12) inset,
-    0 4px 16px -2px rgba(201, 74, 74, 0.45);
+/* ─────────────────────────────────────────────
+   PORTAL OVERLAY
+   ───────────────────────────────────────────── */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s;
+}
+.nav-overlay-visible {
+  opacity: 1;
+  visibility: visible;
 }
 
-.nav-cta:active {
-  transform: translateY(0);
+/* ─────────────────────────────────────────────
+   PORTAL DRAWER
+   ───────────────────────────────────────────── */
+.nav-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(320px, 85vw);
+  z-index: 950;
+  display: flex;
+  flex-direction: column;
+  padding: 4.5rem 2rem 2.5rem;
+  background: #0a0a0a;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: -16px 0 60px rgba(0, 0, 0, 0.6);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform 0.42s var(--nav-ease), visibility 0.42s;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.nav-drawer-open {
+  transform: translateX(0);
+  visibility: visible;
 }
 
-/* Social icons — visible over transparent */
-.nav-social {
+.nav-drawer-close {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 38px;
   height: 38px;
-  color: rgba(255, 255, 255, 0.88);
   border-radius: 50%;
-  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.35));
-  transition: color 0.25s ease, background 0.25s ease, transform 0.25s ease;
-}
-
-.nav-social:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.08);
-  transform: scale(1.05);
-}
-
-/* Hamburger — transparent glass when visible */
-.nav-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  width: 46px;
-  height: 46px;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.80);
   cursor: pointer;
   padding: 0;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03);
-  transition: background 0.3s ease, border-color 0.3s ease;
+  transition: background 0.18s, color 0.18s;
+}
+.nav-drawer-close:hover {
+  background: rgba(255, 255, 255, 0.13);
+  color: #fff;
 }
 
-.nav-toggle:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.15);
+.nav-drawer-links {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-top: 1rem;
 }
 
-.nav-toggle span {
+.nav-drawer-link {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.4rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: color 0.18s, padding-left 0.18s;
+}
+.nav-drawer-link:hover {
+  color: #fff;
+  padding-left: 0.5rem;
+}
+
+.nav-drawer-cta {
   display: block;
-  width: 18px;
-  height: 1.5px;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 1px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+  text-align: center;
+  margin-top: 2rem;
+  padding: 0.9rem 1.5rem;
+  font-family: 'Oswald', system-ui, sans-serif;
+  font-size: 0.80rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #0d0d0d;
+  text-decoration: none;
+  background: #ffffff;
+  border-radius: 9999px;
+  transition: filter 0.2s, transform 0.2s;
 }
-
-.nav-toggle-open span:nth-child(1) {
-  transform: translateY(6.5px) rotate(45deg);
+.nav-drawer-cta:hover {
+  filter: brightness(0.90);
+  transform: translateY(-1px);
 }
-
-.nav-toggle-open span:nth-child(2) {
-  opacity: 0;
-}
-
-.nav-toggle-open span:nth-child(3) {
-  transform: translateY(-6.5px) rotate(-45deg);
-}
-
-/* ——— Tablet ——— */
-@media (max-width: 1024px) {
-  .nav-link:nth-child(n+5) {
-    display: none;
-  }
-}
-
-@media (max-width: 900px) {
-  .nav-cta {
-    display: none;
-  }
-
-  .nav-pill-divider:last-of-type {
-    display: none;
-  }
-}
-
-/* ——— Mobile: full-screen menu ——— */
-@media (max-width: 768px) {
-  .nav {
-    padding: 0.85rem 1rem;
-    background: rgba(8, 8, 8, 0.72);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  }
-
-  .nav-backdrop {
-    opacity: 1;
-  }
-
-  /* Mobile requirement: show only logo (no menu system) */
-  .nav-pill,
-  .nav-toggle {
-    display: none !important;
-  }
-
-  .nav-logo-wrap {
-    position: relative;
-    z-index: 1002;
-  }
-
-  .nav-inner {
-    padding: 0;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
-  }
-
-  .nav-logo-img {
-    height: 40px;
-  }
-
-  .nav-logo-tagline {
-    font-size: 0.55rem;
-    letter-spacing: 0.18em;
-  }
-
-  .nav-toggle {
-    display: flex;
-    position: relative;
-    z-index: 1002;
-  }
-
-  .nav-pill {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: calc(env(safe-area-inset-top, 0px) + 1.25rem) 1.25rem calc(env(safe-area-inset-bottom, 0px) + 2rem);
-    border-radius: 0;
-    background: rgba(8, 8, 8, 0.98);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: none;
-    box-shadow: none;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    transform: translateX(100%);
-    visibility: hidden;
-    transition: transform 520ms var(--nav-ease), visibility 520ms;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    z-index: 2001;
-  }
-
-  .nav-menu-close {
-    position: sticky;
-    top: calc(env(safe-area-inset-top, 0px) + 0.5rem);
-    margin-left: auto;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.06);
-    color: rgba(255, 255, 255, 0.92);
-    font-size: 1.6rem;
-    line-height: 1;
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-    z-index: 1;
-  }
-
-  .nav-pill-open {
-    transform: translateX(0);
-    visibility: visible;
-  }
-
-  .nav-pill-inner {
-    margin-top: 1.25rem;
-    flex-direction: column;
-    gap: 0.35rem;
-    align-items: stretch;
-    width: 100%;
-  }
-
-  .nav-link {
-    font-size: 1.05rem;
-    padding: 0.85rem 1.25rem;
-    width: 100%;
-    text-align: center;
-    letter-spacing: 0.14em;
-  }
-
-  .nav-pill-divider {
-    width: 50%;
-    height: 1px;
-    margin: 0.5rem 0;
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15), transparent);
-  }
-
-  .nav-cta {
-    display: inline-block;
-    text-align: center;
-    margin-top: 0.75rem;
-    padding: 0.75rem 1.5rem;
-    width: 100%;
-  }
-
-  .nav-social {
-    margin-top: 1.25rem;
-    width: 44px;
-    height: 44px;
-  }
-}
-
-@media (max-width: 480px) {
-  .nav {
-    padding: 0.65rem 0.85rem;
-  }
-
-  .nav-logo-img {
-    height: 34px;
-  }
-
-  .nav-logo-tagline {
-    font-size: 0.5rem;
-    letter-spacing: 0.16em;
-  }
-
-  .nav-pill {
-    padding: calc(env(safe-area-inset-top, 0px) + 1.1rem) 1rem calc(env(safe-area-inset-bottom, 0px) + 1.6rem);
-  }
-
-  .nav-pill-inner {
-    gap: 0.35rem;
-  }
-
-  .nav-link {
-    font-size: 0.95rem;
-    padding: 0.75rem 1rem;
-  }
-
-  .nav-cta {
-    width: 100%;
-    margin-top: 0.5rem;
-  }
-
-  .nav-social {
-    margin-top: 1rem;
-    width: 40px;
-    height: 40px;
-  }
-
-  .nav-toggle {
-    width: 42px;
-    height: 42px;
-    gap: 4px;
-  }
-
-  .nav-toggle span {
-    width: 16px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  :root { --nav-duration: 1ms; }
-  .nav-scrolled .nav-inner::before { animation: none; }
-}
+.nav-drawer-cta:active { transform: scale(0.97); }

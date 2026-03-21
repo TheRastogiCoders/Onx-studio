@@ -1,21 +1,20 @@
 import './HeroMarquee.css';
 
 const MARQUEE_ITEMS = [
-  'Editing',
+  'Stories That Move',
+  'Reels & Socials Editing',
+  'Long Form Editing',
+  'Podcast & Shortform',
+  'Commercial & Ads',
   'Color Grading',
   'Motion Design',
-  'VFX',
-  'Stories That Move',
-  'Commercial',
-  'Music Videos',
-  'Documentary',
   'Brand Content',
-  'Social',
 ];
 
 export default function HeroMarquee() {
   const row1 = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
-  const row2 = [...MARQUEE_ITEMS].reverse();
+  const reversed = [...MARQUEE_ITEMS].reverse();
+  const row2 = [...reversed, ...reversed];
 
   return (
     <section className="hero-marquee" aria-hidden="true">

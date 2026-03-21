@@ -1,4 +1,3 @@
-import { useScrollReveal } from '../hooks/useScrollReveal';
 import './Process.css';
 
 const steps = [
@@ -8,25 +7,20 @@ const steps = [
 ];
 
 export default function Process() {
-  const [ref, isVisible] = useScrollReveal({ threshold: 0.15 });
-
   return (
-    <section id="process" className="process section" ref={ref}>
+    <section id="process" className="process section">
       <div className="process-head">
-        <p className={`process-label reveal ${isVisible ? 'reveal-visible' : ''}`}>How We Work</p>
-        <h2 className={`process-title reveal reveal-delay-1 ${isVisible ? 'reveal-visible' : ''}`}>
+        <p className="process-label">How We Work</p>
+        <h2 className="process-title">
           Our <span>Process</span>
         </h2>
-        <p className={`process-sub reveal reveal-delay-2 ${isVisible ? 'reveal-visible' : ''}`}>
+        <p className="process-sub-text">
           A clear, repeatable workflow so your project stays on track and on brand.
         </p>
       </div>
       <div className="process-grid">
         {steps.map((step, i) => (
-          <article
-            key={step.num}
-            className={`process-card reveal reveal-delay-${i + 2} ${isVisible ? 'reveal-visible' : ''}`}
-          >
+          <article key={step.num} className="process-card">
             {i < steps.length - 1 && <div className="process-card-arrow" aria-hidden="true" />}
             <div className="process-card-inner">
               <span className="process-num" aria-hidden="true">{step.num}</span>
