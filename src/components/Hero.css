@@ -1,25 +1,31 @@
-/* ——— Hero: full-viewport section ——— */
+/* ——— Hero: Single full-viewport section ——— */
 
 .hero {
-  position: relative;
-  width: 100%;
   min-height: 100vh;
-  min-height: 100svh;   /* modern units — avoids mobile-browser chrome gap */
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  padding: 6rem clamp(1.5rem, 5vw, 4rem) 5rem;
   overflow: hidden;
-  background: #000;   /* fallback so body never shows through while video loads */
 }
 
-/* Video background — pinned to the section's own edges */
+.hero-slide {
+  position: relative;
+  flex: 0 0 100%;
+  min-width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem clamp(1.5rem, 5vw, 4rem) 5rem;
+  box-sizing: border-box;
+}
+
 .hero-video-wrap {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
   pointer-events: none;
-  z-index: 0;
 }
 
 .hero-video {
@@ -28,7 +34,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Scale slightly so blur edges never show */
+  /* Light blur — scale so blurred edges stay outside the viewport */
   transform: scale(1.06);
   -webkit-filter: blur(2px);
   filter: blur(2px);
@@ -49,8 +55,6 @@
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
-  padding-top: 6rem;    /* clear the fixed navbar */
-  padding-bottom: 5rem;
 }
 
 .hero-content {
