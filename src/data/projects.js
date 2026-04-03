@@ -9,10 +9,10 @@ function slugify(value) {
 }
 
 export const projects = [
- { id: 6, title: 'Fashion Film', category: 'Fashion', tag: 'Color • Motion', videoUrl: '/V.1.mov' },
+ { id: 6, title: 'Fashion Film', category: 'Fashion', tag: 'Color • Motion', videoUrl: '/1.mp4' },
   
-  { id: 7, title: 'Brand Campaign — Automotive', category: 'Commercial', tag: 'Color • Edit', videoUrl: '/V.2.mp4' },
-  { id: 8, title: 'Brand Campaign — Automotive', category: 'Commercial', tag: 'Color • Edit', videoUrl: '/IMG_3309.MOV' },
+  { id: 7, title: 'Brand Campaign — Automotive', category: 'Commercial', tag: 'Color • Edit', videoUrl: '/2.mp4' },
+  { id: 8, title: 'Brand Campaign — Automotive', category: 'Commercial', tag: 'Color • Edit', videoUrl: '/3.mp4' },
   { id: 9, title: 'Brand Campaign — Automotive', category: 'Commercial', tag: 'Color • Edit', videoUrl: '/IMG_2728.MOV' },
   { id: 10, title: 'Brand Campaign — Automotive', category: 'Commercial', tag: 'Color • Edit', videoUrl: '/IMG_3085.MOV' },
   { id: 1, title: 'Brand Campaign — Automotive', category: 'Commercial', tag: 'Color • Edit', videoUrl: '/IMG_9795.MP4' },
