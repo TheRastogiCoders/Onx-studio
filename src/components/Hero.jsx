@@ -22,14 +22,17 @@ export default function Hero() {
             aria-hidden="true"
           />
         </div>
+        <div className="hero-scrim" aria-hidden="true" />
         <div className="hero-inner section">
           <div className="hero-content">
-            <h1 className="hero-title hero-title-headline">
-              <span className="hero-title-white">Welcome to </span>
-              <span className="hero-title-red">ONX</span>
-              <span className="hero-title-white"> STUDIO</span>
+            <h1 className="hero-title">
+              <span className="hero-title-kicker">Welcome to</span>
+              <span className="hero-title-display">
+                <span className="hero-title-mark">ONX</span>
+                <span className="hero-title-suffix">Studio</span>
+              </span>
             </h1>
-            <p className="hero-sub"><em>{HERO_CONTENT.sub}</em></p>
+            <p className="hero-sub">{HERO_CONTENT.sub}</p>
             <div className="hero-cta">
               <a href="#work" className="hero-btn hero-btn-primary">View Our Work</a>
               <a href="#contact" className="hero-btn hero-btn-outline">Get in Touch</a>

@@ -110,7 +110,7 @@ export default function Nav() {
             aria-controls="mobile-menu"
             onClick={() => setMobileOpen(v => !v)}
           >
-            <Menu size={20} strokeWidth={2} />
+            <Menu size={22} strokeWidth={2} />
           </button>
         </div>
 

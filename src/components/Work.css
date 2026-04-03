@@ -21,7 +21,40 @@
 .work-track-wrap {
   position: relative;
   width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  /* `auto` so JS-driven scrollLeft (marquee) is not smoothed and doesn’t spam scroll events */
+  scroll-behavior: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+  cursor: grab;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.06);
+}
+
+.work-track-wrap:active {
+  cursor: grabbing;
+}
+
+.work-track-wrap:focus-visible {
+  outline: 2px solid rgba(139, 0, 0, 0.65);
+  outline-offset: 4px;
+}
+
+.work-track-wrap::-webkit-scrollbar {
+  height: 8px;
+}
+
+.work-track-wrap::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+}
+
+.work-track-wrap::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
 }
 
 .work-track-fade {
@@ -47,36 +80,8 @@
 .work-track {
   display: flex;
   gap: 1.5rem;
-  padding: 0.5rem clamp(1.5rem, 5vw, 4rem) 2.5rem;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.work-track::-webkit-scrollbar {
-  display: none;
-}
-
-/* ——— Auto-scroll: seamless loop (duplicated cards, translate -50%) ——— */
-.work-track--auto {
   width: max-content;
-  overflow: visible;
-  scroll-snap-type: none;
-  animation: workAutoScroll 45s linear infinite;
-}
-
-@keyframes workAutoScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .work-track--auto {
-    animation: none;
-  }
+  padding: 0.5rem clamp(1.5rem, 5vw, 4rem) 2.5rem;
 }
 
 /* ——— Big, transparent premium card ——— */
@@ -96,6 +101,7 @@
   cursor: pointer;
   text-align: left;
   color: inherit;
+  touch-action: inherit;
 }
 
 .work-card-button:focus-visible {
@@ -108,67 +114,6 @@
   transform: scale(1.02);
 }
 
-.work-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  padding: clamp(1rem, 4vw, 2rem);
-  background: rgba(0, 0, 0, 0.72);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  display: grid;
-  place-items: center;
-}
-
-.work-modal-card {
-  position: relative;
-  width: min(1000px, 100%);
-  max-height: min(90vh, 900px);
-  background: rgba(12, 12, 12, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.65);
-}
-
-.work-modal-close-absolute {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 10;
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(12, 12, 12, 0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: var(--text-primary);
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  font-size: 1.4rem;
-  line-height: 1;
-  transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
-}
-
-.work-modal-close-absolute:hover {
-  transform: translateY(-1px);
-  background: rgba(139, 0, 0, 0.4);
-  border-color: rgba(139, 0, 0, 0.6);
-}
-
-.work-modal-player {
-  background: #000;
-}
-
-.work-modal-video {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 78vh;
-  background: #000;
-}
 .work-card-glass {
   height: 100%;
   background: rgba(10, 10, 10, 0.95);
@@ -205,6 +150,7 @@
   height: calc(100% - 24px);
   object-fit: cover;
   border-radius: 2px;
+  pointer-events: none;
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -217,14 +163,6 @@
   inset: 12px;
   border-radius: 2px;
   background: linear-gradient(145deg, rgba(20, 20, 20, 0.95) 0%, var(--accent-red-subtle) 100%);
-}
-
-.work-card-media-overlay {
-  position: absolute;
-  inset: 12px;
-  border-radius: 2px;
-  background: linear-gradient(180deg, transparent 0%, transparent 45%, rgba(0, 0, 0, 0.5) 100%);
-  pointer-events: none;
 }
 
 /* Info — over the video, bottom; hidden by default, show on card hover */
