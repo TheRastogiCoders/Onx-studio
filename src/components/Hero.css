@@ -24,41 +24,105 @@
   box-sizing: border-box;
 }
 
-.hero-video-wrap {
+/* Layered gradient “studio” backdrop (replaces video) */
+.hero-backdrop {
   position: absolute;
   inset: 0;
-  pointer-events: none;
   z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 100% 85% at 50% 120%, rgba(20, 0, 0, 0.55) 0%, transparent 42%),
+    radial-gradient(ellipse 70% 55% at 85% 20%, rgba(139, 0, 0, 0.22) 0%, transparent 50%),
+    radial-gradient(ellipse 65% 50% at 10% 65%, rgba(60, 0, 0, 0.28) 0%, transparent 48%),
+    linear-gradient(165deg, #0c0c0f 0%, #050506 38%, #08080b 72%, #060607 100%);
 }
 
-.hero-video {
+.hero-backdrop-glow {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: scale(1.06);
-  -webkit-filter: blur(2px);
-  filter: blur(2px);
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.85;
+  pointer-events: none;
+  transform: translateZ(0);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero-video {
-    transform: none;
-    -webkit-filter: none;
-    filter: none;
+.hero-backdrop-glow-a {
+  width: min(120vw, 900px);
+  height: min(90vw, 520px);
+  top: -18%;
+  left: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(235, 0, 0, 0.22) 0%,
+    rgba(139, 0, 0, 0.08) 38%,
+    transparent 70%
+  );
+  transform: translateX(-50%);
+}
+
+.hero-backdrop-glow-b {
+  width: min(100vw, 640px);
+  height: min(80vw, 440px);
+  bottom: -25%;
+  right: -15%;
+  background: radial-gradient(
+    circle,
+    rgba(139, 0, 0, 0.14) 0%,
+    rgba(40, 0, 0, 0.2) 45%,
+    transparent 68%
+  );
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-backdrop-glow-a {
+    animation: heroGlowFloatA 22s ease-in-out infinite alternate;
+  }
+
+  .hero-backdrop-glow-b {
+    animation: heroGlowFloatB 26s ease-in-out infinite alternate;
   }
 }
 
-/* Readability layer over video */
+@keyframes heroGlowFloatA {
+  0% {
+    opacity: 0.75;
+    transform: translateX(-50%) scale(1);
+  }
+  100% {
+    opacity: 0.95;
+    transform: translateX(calc(-50% + 1.25rem)) translateY(2%) scale(1.06);
+  }
+}
+
+@keyframes heroGlowFloatB {
+  0% {
+    opacity: 0.7;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0.9;
+    transform: translate(-4%, -3%) scale(1.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-backdrop-glow-a,
+  .hero-backdrop-glow-b {
+    animation: none;
+    opacity: 0.82;
+  }
+}
+
+/* Readability / vignette over backdrop */
 .hero-scrim {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 90% 70% at 50% 42%, transparent 0%, rgba(4, 4, 8, 0.5) 100%),
-    linear-gradient(180deg, rgba(6, 6, 10, 0.35) 0%, transparent 38%, transparent 58%, rgba(6, 6, 10, 0.65) 100%);
+    radial-gradient(ellipse 90% 70% at 50% 42%, transparent 0%, rgba(2, 2, 6, 0.42) 100%),
+    linear-gradient(180deg, rgba(4, 4, 8, 0.28) 0%, transparent 36%, transparent 62%, rgba(4, 4, 8, 0.55) 100%);
 }
 
 .hero-inner {

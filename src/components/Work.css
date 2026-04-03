@@ -1,21 +1,133 @@
-/* ——— Selected Work: big cards, video preview, autoplay, transparent premium ——— */
+/* ——— Selected Work: premium marquee, editorial cards, auto-scroll ——— */
 
 .work {
   background: transparent;
   position: relative;
-  padding-bottom: clamp(3rem, 8vw, 5rem);
+  padding-bottom: clamp(3rem, 8vw, 5.5rem);
 }
 
 .work-inner {
-  padding-bottom: 1.5rem;
+  padding-bottom: clamp(1rem, 3vw, 1.75rem);
 }
 
 .work-head {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1.25rem 2rem;
+}
+
+/* GSAP MotionPath: decorative orbit accent */
+.work-orbit {
+  position: absolute;
+  top: -0.25rem;
+  right: 0;
+  width: 76px;
+  height: 76px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.92;
+}
+
+.work-orbit-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.work-orbit-path {
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 0.75;
+  stroke-dasharray: 4 8;
+}
+
+html:not(.dark) .work-orbit-path {
+  stroke: rgba(0, 0, 0, 0.12);
+}
+
+.work-orbit-dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 -3.5px;
+  border-radius: 50%;
+  background: var(--accent-red);
+  box-shadow:
+    0 0 14px rgba(235, 0, 0, 0.55),
+    0 0 28px rgba(235, 0, 0, 0.2);
+  will-change: transform;
+}
+
+@media (max-width: 640px) {
+  .work-orbit {
+    width: 56px;
+    height: 56px;
+    top: -0.5rem;
+    right: -0.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-orbit {
+    display: none;
+  }
+}
+
+.work-section-head .section-head {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0;
+  max-width: min(640px, 100%);
+}
+
+.work-intro {
+  margin: 1rem 0 0;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 42ch;
+}
+
+.work-view-all {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: 'Oswald', system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding-bottom: 0.2rem;
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease,
+    gap 0.3s ease;
+}
+
+html:not(.dark) .work-view-all {
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+}
+
+.work-view-all:hover {
+  color: var(--accent-red);
+  border-bottom-color: rgba(235, 0, 0, 0.45);
+  gap: 0.65rem;
+}
+
+.work-view-all-arrow {
+  font-size: 0.95rem;
+  line-height: 1;
+  opacity: 0.85;
 }
 
 .work-track-wrap {
@@ -24,14 +136,13 @@
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x proximity;
-  /* `auto` so JS-driven scrollLeft (marquee) is not smoothed and doesn’t spam scroll events */
   scroll-behavior: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
   touch-action: pan-x;
   cursor: grab;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.06);
+  scrollbar-color: rgba(255, 255, 255, 0.22) rgba(255, 255, 255, 0.04);
 }
 
 .work-track-wrap:active {
@@ -44,16 +155,22 @@
 }
 
 .work-track-wrap::-webkit-scrollbar {
-  height: 8px;
+  height: 5px;
 }
 
 .work-track-wrap::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.04);
   border-radius: 999px;
+  margin-inline: clamp(1.5rem, 5vw, 4rem);
 }
 
 .work-track-wrap::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.12),
+    rgba(235, 0, 0, 0.35),
+    rgba(255, 255, 255, 0.12)
+  );
   border-radius: 999px;
 }
 
@@ -61,7 +178,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  width: clamp(80px, 12vw, 180px);
+  width: clamp(72px, 10vw, 140px);
   pointer-events: none;
   z-index: 2;
 }
@@ -79,19 +196,26 @@
 
 .work-track {
   display: flex;
-  gap: 1.5rem;
+  align-items: stretch;
+  gap: clamp(1.1rem, 2.2vw, 1.75rem);
   width: max-content;
-  padding: 0.5rem clamp(1.5rem, 5vw, 4rem) 2.5rem;
+  padding: 0.65rem clamp(1.5rem, 5vw, 4rem) 2rem;
 }
 
-/* ——— Big, transparent premium card ——— */
+/* ——— Premium card ——— */
 .work-card {
   flex: 0 0 auto;
-  width: min(340px, 70vw);
+  width: min(300px, 74vw);
   scroll-snap-align: start;
-  scroll-snap-stop: always;
+  scroll-snap-stop: normal;
   display: block;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 768px) {
+  .work-card {
+    width: clamp(280px, 24vw, 340px);
+  }
 }
 
 .work-card-button {
@@ -106,114 +230,104 @@
 
 .work-card-button:focus-visible {
   outline: 2px solid rgba(139, 0, 0, 0.65);
-  outline-offset: 6px;
-  border-radius: 18px;
+  outline-offset: 8px;
+  border-radius: 28px;
 }
 
 .work-card:hover {
-  transform: scale(1.02);
+  transform: translateY(-6px);
 }
 
 .work-card-glass {
   height: 100%;
-  background: rgba(10, 10, 10, 0.95);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 18px;
+  border-radius: 22px;
   overflow: hidden;
-  transition: border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+  background: linear-gradient(
+    145deg,
+    rgba(22, 22, 26, 0.92) 0%,
+    rgba(10, 10, 12, 0.98) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.35) inset,
+    0 24px 56px -20px rgba(0, 0, 0, 0.65),
+    0 0 80px -40px rgba(139, 0, 0, 0.15);
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.4s ease;
+}
+
+html:not(.dark) .work-card-glass {
+  background: linear-gradient(145deg, #ffffff 0%, rgba(250, 250, 252, 0.96) 100%);
+  border-color: rgba(0, 0, 0, 0.07);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.04) inset,
+    0 20px 48px -24px rgba(0, 0, 0, 0.12);
 }
 
 .work-card:hover .work-card-glass {
-  border-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.14);
   box-shadow:
-    0 32px 64px -12px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.06);
-  background: rgba(14, 14, 14, 0.98);
+    0 0 0 1px rgba(235, 0, 0, 0.2) inset,
+    0 36px 72px -24px rgba(0, 0, 0, 0.7),
+    0 0 72px -28px rgba(235, 0, 0, 0.22),
+    0 20px 48px -12px rgba(0, 0, 0, 0.35);
 }
 
-/* ——— Video / media area: monitor-style frame ——— */
+html:not(.dark) .work-card:hover .work-card-glass {
+  border-color: rgba(139, 0, 0, 0.22);
+  box-shadow:
+    0 0 0 1px rgba(139, 0, 0, 0.08) inset,
+    0 28px 56px -20px rgba(0, 0, 0, 0.14);
+}
+
+/* ——— Video frame ——— */
 .work-card-media {
   position: relative;
   aspect-ratio: 9 / 16;
+  height: 100%;
+  background: #050505;
   overflow: hidden;
-  background: #0a0a0a;
-  padding: 12px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
 }
 
+/*
+ * Centered “overscan” hides decoder / GPU vertical tile seams on some MP4/MOV
+ * files (especially with split-toned frames). Do not use isolation: isolate
+ * here — it can worsen WebKit video layer splitting.
+ */
 .work-card-video {
   position: absolute;
-  inset: 12px;
-  width: calc(100% - 24px);
-  height: calc(100% - 24px);
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  display: block;
   object-fit: cover;
-  border-radius: 2px;
+  object-position: center;
   pointer-events: none;
-  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  outline: none;
+  border: 0;
+  transform: translate3d(-50%, -50%, 0) scale(1.09);
+  transform-origin: center center;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .work-card:hover .work-card-video {
-  transform: scale(1.04);
+  transform: translate3d(-50%, -50%, 0) scale(1.13);
 }
 
 .work-card-placeholder {
   position: absolute;
-  inset: 12px;
-  border-radius: 2px;
+  inset: 0;
   background: linear-gradient(145deg, rgba(20, 20, 20, 0.95) 0%, var(--accent-red-subtle) 100%);
 }
 
-/* Info — over the video, bottom; hidden by default, show on card hover */
-.work-card-info {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  right: 12px;
-  padding: 1.25rem 1.5rem;
-  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.75) 35%, rgba(0, 0, 0, 0.9) 100%);
-  border-radius: 0 0 2px 2px;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.35s ease, transform 0.35s ease;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.work-card:hover .work-card-info {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.work-card-category {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent-red);
-  display: block;
-  margin-bottom: 0.35rem;
-}
-
-.work-card-title {
-  font-family: 'Oswald', sans-serif;
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin-bottom: 0.3rem;
-  color: var(--text-primary);
-  letter-spacing: 0.01em;
-  line-height: 1.3;
-}
-
-.work-card-tag {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  letter-spacing: 0.02em;
-}
-
 .work-cta-wrap {
-  padding-top: 2rem;
+  padding-top: clamp(2rem, 5vw, 3rem);
 }
 
 .work-cta {
@@ -235,8 +349,12 @@
   border-radius: 12px;
   text-decoration: none;
   overflow: hidden;
-  transition: color 0.35s ease, border-color 0.35s ease, background 0.35s ease,
-    box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    color 0.35s ease,
+    border-color 0.35s ease,
+    background 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.03) inset,
     0 4px 20px -4px rgba(0, 0, 0, 0.4);
@@ -267,4 +385,31 @@
 
 .btn-reel:active {
   transform: translateY(0);
+}
+
+@media (max-width: 640px) {
+  .work-view-all {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .work-card:hover {
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-card,
+  .work-card-glass,
+  .work-card-video {
+    transition: none;
+  }
+
+  .work-card:hover {
+    transform: none;
+  }
+
+  .work-card:hover .work-card-video {
+    transform: translate3d(-50%, -50%, 0) scale(1.09);
+  }
 }

@@ -1,8 +1,5 @@
 import './Hero.css';
 
-/** Hero background video (file in /public) */
-const HERO_VIDEO_SRC = '/IMG_2234%203.mov';
-
 const HERO_CONTENT = {
   sub: 'Premium editing, color grading, and motion design for brands and creators.',
 };
@@ -11,16 +8,9 @@ export default function Hero() {
   return (
     <section id="hero" className="hero" role="region" aria-label="Featured stories">
       <div className="hero-slide">
-        <div className="hero-video-wrap">
-          <video
-            className="hero-video"
-            src={HERO_VIDEO_SRC}
-            autoPlay
-            muted
-            loop
-            playsInline
-            aria-hidden="true"
-          />
+        <div className="hero-backdrop" aria-hidden="true">
+          <div className="hero-backdrop-glow hero-backdrop-glow-a" />
+          <div className="hero-backdrop-glow hero-backdrop-glow-b" />
         </div>
         <div className="hero-scrim" aria-hidden="true" />
         <div className="hero-inner section">
