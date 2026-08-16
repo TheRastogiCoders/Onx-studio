@@ -12,7 +12,7 @@ export default function ProcessPage() {
     <div className="page page-process">
       <section className="page-hero">
         <div className="page-hero-bg" aria-hidden="true" />
-        <div className="section page-hero-inner">
+        <div className="page-hero-inner">
           <p className="page-hero-label">How We Work</p>
           <h1 className="page-hero-title">
             Our <span>Process</span>

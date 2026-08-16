@@ -15,7 +15,7 @@ export default function ServicesPage() {
     <div className="page page-services">
       <section className="page-hero">
         <div className="page-hero-bg" aria-hidden="true" />
-        <div className="section page-hero-inner">
+        <div className="page-hero-inner">
           <p className="page-hero-label">What We Do</p>
           <h1 className="page-hero-title">
             Full-Service <span>Video</span> Production

@@ -12,11 +12,11 @@ export default function WorkDetailPage() {
       <div className="page page-work-detail">
         <section className="page-hero">
           <div className="page-hero-bg" aria-hidden="true" />
-          <div className="section page-hero-inner">
+          <div className="page-hero-inner">
             <p className="page-hero-label">Portfolio</p>
             <h1 className="page-hero-title">Project not found</h1>
             <p className="page-hero-desc">That work item doesn’t exist (or the link is outdated).</p>
-            <Link to="/work" className="btn btn-primary">Back to Work</Link>
+            <Link to="/work" className="btn btn-primary">Back to work</Link>
           </div>
         </section>
       </div>
@@ -27,15 +27,13 @@ export default function WorkDetailPage() {
     <div className="page page-work-detail">
       <section className="page-hero">
         <div className="page-hero-bg" aria-hidden="true" />
-        <div className="section page-hero-inner">
+        <div className="page-hero-inner">
           <p className="page-hero-label">{project.category}</p>
-          <h1 className="page-hero-title">
-            {project.title}
-          </h1>
+          <h1 className="page-hero-title">{project.title}</h1>
           <p className="page-hero-desc">{project.tag}</p>
           <div className="work-detail-hero-actions">
             <Link to="/work" className="btn btn-secondary">Back</Link>
-            <Link to="/contact" className="btn btn-primary">Start a Project</Link>
+            <Link to="/contact" className="btn btn-primary">Start a project</Link>
           </div>
         </div>
       </section>
@@ -54,4 +52,3 @@ export default function WorkDetailPage() {
     </div>
   );
 }
-

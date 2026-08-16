@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Mail, Phone, Clock, Send, CheckCircle2 } from 'lucide-react';
+import Reveal from './motion/Reveal';
+import Magnetic from './motion/Magnetic';
 import './Contact.css';
 
 const PROJECT_TYPES = [
@@ -21,69 +23,58 @@ export default function Contact() {
 
   return (
     <section id="contact" className="contact" aria-labelledby="contact-heading">
-      <div className="contact-bg" aria-hidden="true" />
       <div className="contact-inner section">
-        <header className="contact-header">
-          <div className="contact-label-row">
-            <span className="contact-label-line contact-label-line--left" aria-hidden="true" />
-            <p className="contact-eyebrow">Get in touch</p>
-            <span className="contact-label-line contact-label-line--right" aria-hidden="true" />
-          </div>
-          <h2 id="contact-heading" className="contact-title">
-            Let&apos;s <span className="contact-title-accent">create</span>
+        <Reveal className="contact-header">
+          <p className="section-label">Get in touch</p>
+          <h2 id="contact-heading" className="section-title">
+            Let's <span>create</span>
           </h2>
-          <p className="contact-lede">
-            Share a short brief—timeline, references, and goals. We reply within one business day, often sooner.
+          <p className="section-lede contact-lede">
+            Share a short brief — timeline, references, and goals. We reply within one business day.
           </p>
-        </header>
+        </Reveal>
 
         <div className="contact-grid">
-          <aside className="contact-aside" aria-label="Contact options">
-            <div className="contact-card">
+          <Reveal className="contact-aside" delay={0.05}>
+            <a className="contact-card" href="mailto:theonxstudio@gmail.com">
               <span className="contact-card-icon" aria-hidden="true">
-                <Mail size={20} strokeWidth={1.5} />
+                <Mail size={18} strokeWidth={1.6} />
               </span>
-              <div className="contact-card-body">
+              <span>
                 <span className="contact-card-label">Email</span>
-                <a href="mailto:theonxstudio@gmail.com" className="contact-card-value">
-                  theonxstudio@gmail.com
-                </a>
-              </div>
-            </div>
-            <div className="contact-card">
-              <span className="contact-card-icon" aria-hidden="true">
-                <Phone size={20} strokeWidth={1.5} />
+                <span className="contact-card-value">theonxstudio@gmail.com</span>
               </span>
-              <div className="contact-card-body">
+            </a>
+            <a className="contact-card" href="tel:+918426980385">
+              <span className="contact-card-icon" aria-hidden="true">
+                <Phone size={18} strokeWidth={1.6} />
+              </span>
+              <span>
                 <span className="contact-card-label">Phone</span>
-                <a href="tel:+918426980385" className="contact-card-value">
-                  +91 84269 80385
-                </a>
-              </div>
-            </div>
-            <div className="contact-card contact-card--muted">
-              <span className="contact-card-icon" aria-hidden="true">
-                <Clock size={20} strokeWidth={1.5} />
+                <span className="contact-card-value">+91 84269 80385</span>
               </span>
-              <div className="contact-card-body">
+            </a>
+            <div className="contact-card contact-card-static">
+              <span className="contact-card-icon" aria-hidden="true">
+                <Clock size={18} strokeWidth={1.6} />
+              </span>
+              <span>
                 <span className="contact-card-label">Availability</span>
-                <p className="contact-card-value contact-card-value--static">
-                  Mon–Fri · 9am–6pm IST
-                </p>
-              </div>
+                <span className="contact-card-value">Mon–Fri · 9am–6pm IST</span>
+              </span>
             </div>
             <p className="contact-aside-note">
-              Prefer a call? Mention it in your message and we&apos;ll schedule a slot.
+              Prefer a call? Mention it in your message and we'll schedule a slot.
             </p>
-          </aside>
+          </Reveal>
 
-          <div className="contact-form-shell">
+          <Reveal className="contact-form-shell" delay={0.1}>
             <form className="contact-form" onSubmit={handleSubmit}>
               {submitted ? (
                 <div className="contact-success" role="status">
-                  <CheckCircle2 className="contact-success-icon" size={40} strokeWidth={1.25} aria-hidden="true" />
+                  <CheckCircle2 size={40} strokeWidth={1.3} aria-hidden="true" />
                   <p className="contact-success-title">Message received</p>
-                  <p className="contact-success-desc">We&apos;ll get back to you shortly.</p>
+                  <p className="contact-success-desc">We'll get back to you shortly.</p>
                 </div>
               ) : (
                 <>
@@ -91,60 +82,46 @@ export default function Contact() {
                     <p className="contact-form-eyebrow">Project brief</p>
                     <p className="contact-form-hint">Fields marked with * are required.</p>
                   </div>
-                  <div className="contact-form-fields">
-                    <div className="form-row">
-                      <label htmlFor="contact-name">Name *</label>
-                      <input
-                        id="contact-name"
-                        name="name"
-                        type="text"
-                        required
-                        autoComplete="name"
-                        placeholder="Your name"
-                      />
-                    </div>
-                    <div className="form-row">
-                      <label htmlFor="contact-email">Email *</label>
-                      <input
-                        id="contact-email"
-                        name="email"
-                        type="email"
-                        required
-                        autoComplete="email"
-                        placeholder="you@company.com"
-                      />
-                    </div>
-                    <div className="form-row">
-                      <label htmlFor="contact-type">Focus</label>
-                      <div className="contact-select-wrap">
-                        <select id="contact-type" name="projectType" className="contact-select">
-                          {PROJECT_TYPES.map((opt) => (
-                            <option key={opt.value || 'default'} value={opt.value}>
-                              {opt.label}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                    <div className="form-row">
-                      <label htmlFor="contact-message">Details *</label>
-                      <textarea
-                        id="contact-message"
-                        name="message"
-                        rows={5}
-                        required
-                        placeholder="Timeline, deliverables, references, links…"
-                      />
+                  <div className="form-row">
+                    <label htmlFor="contact-name">Name *</label>
+                    <input id="contact-name" name="name" type="text" required autoComplete="name" placeholder="Your name" />
+                  </div>
+                  <div className="form-row">
+                    <label htmlFor="contact-email">Email *</label>
+                    <input id="contact-email" name="email" type="email" required autoComplete="email" placeholder="you@company.com" />
+                  </div>
+                  <div className="form-row">
+                    <label htmlFor="contact-type">Focus</label>
+                    <div className="contact-select-wrap">
+                      <select id="contact-type" name="projectType" className="contact-select">
+                        {PROJECT_TYPES.map((opt) => (
+                          <option key={opt.value || 'default'} value={opt.value}>
+                            {opt.label}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
-                  <button type="submit" className="contact-submit">
-                    <span>Send message</span>
-                    <Send size={18} strokeWidth={2} aria-hidden="true" />
-                  </button>
+                  <div className="form-row">
+                    <label htmlFor="contact-message">Details *</label>
+                    <textarea
+                      id="contact-message"
+                      name="message"
+                      rows={5}
+                      required
+                      placeholder="Timeline, deliverables, references, links…"
+                    />
+                  </div>
+                  <Magnetic strength={0.12} className="contact-submit-wrap">
+                    <button type="submit" className="contact-submit">
+                      <span>Send message</span>
+                      <Send size={16} strokeWidth={2} aria-hidden="true" />
+                    </button>
+                  </Magnetic>
                 </>
               )}
             </form>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

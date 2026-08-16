@@ -1,10 +1,12 @@
 import { Clapperboard, Palette, Sparkles } from 'lucide-react';
+import Reveal from './motion/Reveal';
+import CountUp from './motion/CountUp';
 import './About.css';
 
 const PRINCIPLES = [
   {
     title: 'Edit with intent',
-    desc: 'Every cut earns its place—pacing that holds attention without noise.',
+    desc: 'Every cut earns its place — pacing that holds attention without noise.',
     Icon: Clapperboard,
   },
   {
@@ -19,59 +21,54 @@ const PRINCIPLES = [
   },
 ];
 
-const STATS = [
-  { value: '200+', label: 'Projects delivered' },
-  { value: '3+', label: 'Years in post' },
-  { value: '24h', label: 'Typical reply' },
-];
-
 export default function About() {
   return (
     <section id="about" className="about" aria-labelledby="about-heading">
-      <div className="about-bg" aria-hidden="true" />
       <div className="about-inner section">
-        <div className="about-shell">
-          <div className="about-panel">
-            <div className="about-label-row">
-              <span className="about-label-line about-label-line--left" aria-hidden="true" />
-              <p className="about-eyebrow">About us</p>
-              <span className="about-label-line about-label-line--right" aria-hidden="true" />
-            </div>
-            <h2 id="about-heading" className="about-title">
-              <span className="about-title-line">Craft-led</span>{' '}
-              <span className="about-title-accent">post production</span>
+        <div className="about-layout">
+          <Reveal className="about-copy">
+            <p className="section-label">About us</p>
+            <h2 id="about-heading" className="section-title">
+              Craft-led <span>post</span>
             </h2>
             <p className="about-lede">
-              We partner with brands and creators who care how their work feels—not just how fast it ships.
-              Offline edit, grade, and motion under one roof, with a pipeline built for clarity and speed.
+              We partner with brands and creators who care how their work feels — not just how fast it ships.
             </p>
             <p className="about-body">
-              From campaign spots to long-form series, we treat each project as a narrative problem: rhythm,
-              contrast, and sound design working together. Fewer endless loops—more decisive passes until the
-              cut feels inevitable.
+              Offline edit, grade, and motion under one roof. From campaign spots to long-form series, we treat each project as a narrative problem: rhythm, contrast, and sound working together until the cut feels inevitable.
             </p>
-            <ul className="about-principles" role="list">
-              {PRINCIPLES.map(({ title, desc, Icon }) => (
-                <li key={title} className="about-principle">
-                  <span className="about-principle-icon" aria-hidden="true">
-                    <Icon size={22} strokeWidth={1.35} />
-                  </span>
-                  <span className="about-principle-title">{title}</span>
-                  <span className="about-principle-desc">{desc}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          </Reveal>
 
           <div className="about-stats" role="list" aria-label="Studio highlights">
-            {STATS.map((s) => (
-              <div key={s.label} className="about-stat" role="listitem">
-                <span className="about-stat-value">{s.value}</span>
-                <span className="about-stat-label">{s.label}</span>
-              </div>
-            ))}
+            <Reveal delay={0.05} className="about-stat" role="listitem">
+              <CountUp className="about-stat-value" end={200} suffix="+" />
+              <span className="about-stat-label">Projects delivered</span>
+            </Reveal>
+            <Reveal delay={0.12} className="about-stat" role="listitem">
+              <CountUp className="about-stat-value" end={3} suffix="+" />
+              <span className="about-stat-label">Years in post</span>
+            </Reveal>
+            <Reveal delay={0.18} className="about-stat" role="listitem">
+              <span className="about-stat-value">24h</span>
+              <span className="about-stat-label">Typical reply</span>
+            </Reveal>
           </div>
         </div>
+
+        <ul className="about-principles" role="list">
+          {PRINCIPLES.map((item, i) => {
+            const PrincipleIcon = item.Icon;
+            return (
+              <Reveal as="li" key={item.title} delay={i * 0.08} className="about-principle">
+                <span className="about-principle-icon" aria-hidden="true">
+                  <PrincipleIcon size={22} strokeWidth={1.4} />
+                </span>
+                <span className="about-principle-title">{item.title}</span>
+                <span className="about-principle-desc">{item.desc}</span>
+              </Reveal>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );

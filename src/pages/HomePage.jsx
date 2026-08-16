@@ -2,7 +2,9 @@ import Hero from '../components/Hero';
 import HeroMarquee from '../components/HeroMarquee';
 import Services from '../components/Services';
 import Work from '../components/Work';
+import Process from '../components/Process';
 import About from '../components/About';
+import CtaBanner from '../components/CtaBanner';
 import Contact from '../components/Contact';
 
 export default function HomePage() {
@@ -12,7 +14,9 @@ export default function HomePage() {
       <HeroMarquee />
       <Services />
       <Work />
+      <Process />
       <About />
+      <CtaBanner />
       <Contact />
     </div>
   );
